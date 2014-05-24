@@ -4,7 +4,7 @@ var mkdirp = require('mkdirp');
 var exec = require('child_process').exec;
 var path = require('path');
 
-module.exports = function i18n(gulp, gwd, conf){
+module.exports = function i18n(gulp, gwd, conf, cb){
 
   var sets = conf.sets;
   var locales = conf.locales.map(function(locale){
@@ -12,7 +12,8 @@ module.exports = function i18n(gulp, gwd, conf){
   });
   var localeSets = locales.length * Object.keys(sets).length;
 
-  return gulp.task('i18n', function(cb){
+  return function(cb){
+    cb = cb || function(){};
     var localeSetsDone = 0;
     locales.forEach(function(locale){
       var lang = locale.substring(0,2);
@@ -23,12 +24,13 @@ module.exports = function i18n(gulp, gwd, conf){
         var setPath = path.join(conf.output, locale, set);
         // locale to use
         cmd += ' -l ' + lang;
-        // directory containings messageformat files to compile
+        // directory containing messageformat files to compile
         cmd += ' -i ' + path.join(conf.input, locale);
         // Glob patterns for files to include in `inputdir`
         cmd += ' -I "' + sets[set] + '"';
         // output where messageformat will be compiled
         cmd += ' -o ' + setPath;
+
         exec(cmd, function (err, stdout, stderr) {
           if (stderr || err) {
             console.warn('i18n error:', err, stderr);
@@ -41,6 +43,6 @@ module.exports = function i18n(gulp, gwd, conf){
         });
       });
     });
-  });
+  };
 
 };
