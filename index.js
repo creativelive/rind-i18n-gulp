@@ -5,6 +5,8 @@ var exec = require('child_process').exec;
 var path = require('path');
 
 module.exports = function i18n(gulp, gwd, conf, cb){
+  gwd = gwd || process.cwd();
+  conf = conf || {};
 
   var sets = conf.sets;
   var locales = conf.locales.map(function(locale){
