@@ -13,26 +13,34 @@ module.exports = function(gulp, gwd, conf){
     sets: {
       'foo.js': ['foo/main.json']
     },
-    locales: [ 'en-US' ],
+    locales: [ 'en-US', 'fr-fr' ],
     output: path.join(gwd, 'test', 'out', 'js', 'i18n'),
     input: path.join(gwd, 'test', 'lang')
   };
 
+  var expected = {
+    'en-us': require(path.join(opts.input, 'en-us', 'foo', 'main.json')),
+    'fr-fr': require(path.join(opts.input, 'fr-fr', 'foo', 'main.json'))
+  };
+
   return gulp.task('test', function(cb) {
+
     i18n(gulp, gwd, opts)(function(){
-
-      var fn = fs.readFileSync(path.join(opts.output, opts.locales[0].toLowerCase(), 'foo.js'), 'utf8');
-
+      var tr = {
+        'en-us': fs.readFileSync(path.join(opts.output, opts.locales[0].toLowerCase(), 'foo.js'), 'utf8'),
+        'fr-fr': fs.readFileSync(path.join(opts.output, opts.locales[1].toLowerCase(), 'foo.js'), 'utf8')
+      };
       var window = {};
-      window.i18n = {};
-      eval(fn);
-
-      if(window.i18n['foo/main'].greeting() !== 'hello'){
-        gulp.fail = true;
+      for(var expect in expected){
+        window.i18n = {};
+        eval(tr[expect]);
+        if(window.i18n['foo/main'].greeting() !== expected[expect].greeting){
+          gulp.fail = true;
+        }
       }
       cb();
-
     });
+
   });
 
 };
