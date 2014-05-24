@@ -7,15 +7,16 @@ var path = require('path');
 var gulp = require('gulp');
 var fs = require('fs');
 
-module.exports = function(gulp, gwd, conf){
+module.exports = function(gulp, conf){
 
   var opts = {
     sets: {
       'foo.js': ['foo/main.json']
     },
     locales: [ 'en-US', 'fr-fr' ],
-    output: path.join(gwd, 'test', 'out', 'js', 'i18n'),
-    input: path.join(gwd, 'test', 'lang')
+    output: path.join(conf.gwd, 'test', 'out', 'js', 'i18n'),
+    input: path.join(conf.gwd, 'test', 'lang'),
+    gwd: conf.gwd
   };
 
   var expected = {
@@ -25,7 +26,7 @@ module.exports = function(gulp, gwd, conf){
 
   return gulp.task('test', function(cb) {
 
-    i18n(gulp, gwd, opts)(function(){
+    i18n(gulp, opts)(function(){
       var tr = {
         'en-us': fs.readFileSync(path.join(opts.output, opts.locales[0].toLowerCase(), 'foo.js'), 'utf8'),
         'fr-fr': fs.readFileSync(path.join(opts.output, opts.locales[1].toLowerCase(), 'foo.js'), 'utf8')

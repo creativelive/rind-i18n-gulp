@@ -8,13 +8,14 @@ var parseArgs = require('minimist');
 var conf = {
   // app: new Confidence.Store(require('./conf/app')),
   // build: new Confidence.Store(require('./conf/build')),
-  args: parseArgs(process.argv.slice(2))
+  args: parseArgs(process.argv.slice(2)),
+  gwd: __dirname
 };
 
 // combine all the gulp tasks
 require('fs').readdirSync('./gulp').forEach(function(file) {
   if (path.extname(file) === '.js') {
-    require('./gulp/' + file)(gulp, __dirname, conf);
+    require('./gulp/' + file)(gulp, conf);
   }
 });
 

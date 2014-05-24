@@ -4,8 +4,7 @@ var mkdirp = require('mkdirp');
 var exec = require('child_process').exec;
 var path = require('path');
 
-module.exports = function i18n(gulp, gwd, conf, cb){
-  gwd = gwd || process.cwd();
+module.exports = function i18n(gulp, conf, cb){
   conf = conf || {};
 
   var sets = conf.sets;
