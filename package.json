@@ -1,6 +1,6 @@
 {
   "name": "rind-i18n-gulp",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "gulp task to generate rind i18n files",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,11 @@
   "license": "MIT",
   "dependencies": {
     "mkdirp": "^0.5.0",
-    "messageformat": "^0.1.8"
+    "messageformat": ">=0.1.8"
   },
+  "bundledDependencies" : [
+    "messageformat"
+  ],
   "devDependencies": {
     "gulp": "^3.6.2",
     "minimist": "^0.1.0",
