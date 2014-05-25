@@ -1,6 +1,6 @@
 {
   "name": "rind-i18n-gulp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "gulp task to generate rind i18n files",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,6 @@
   "devDependencies": {
     "gulp": "^3.6.2",
     "minimist": "^0.1.0",
-    "gulp-rimraf": "^0.1.0"
+    "rimraf": "^2.2.8"
   }
 }

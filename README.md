@@ -22,3 +22,6 @@ gulp.task('i18n', function() {
 });
 
 ```
+
+
+TODO add eslint, jsbeautfiy

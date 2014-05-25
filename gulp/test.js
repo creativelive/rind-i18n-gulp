@@ -18,30 +18,25 @@ module.exports = function(gulp, conf){
     input: path.join(conf.gwd, 'test', 'lang'),
     gwd: conf.gwd
   };
+  gulp.task('i18n', ['clean'], i18n(gulp, opts));
 
-  var expected = {
-    'en-us': require(path.join(opts.input, 'en-us', 'foo', 'main.json')),
-    'fr-fr': require(path.join(opts.input, 'fr-fr', 'foo', 'main.json'))
-  };
-
-  return gulp.task('test', function(cb) {
-
-    i18n(gulp, opts)(function(){
-      var tr = {
-        'en-us': fs.readFileSync(path.join(opts.output, opts.locales[0].toLowerCase(), 'foo.js'), 'utf8'),
-        'fr-fr': fs.readFileSync(path.join(opts.output, opts.locales[1].toLowerCase(), 'foo.js'), 'utf8')
-      };
-      var window = {};
-      for(var expect in expected){
-        window.i18n = {};
-        eval(tr[expect]);
-        if(window.i18n['foo/main'].greeting() !== expected[expect].greeting){
-          gulp.fail = true;
-        }
+  gulp.task('test', ['i18n'], function() {
+    var expected = {
+      'en-us': require(path.join(opts.input, 'en-us', 'foo', 'main.json')),
+      'fr-fr': require(path.join(opts.input, 'fr-fr', 'foo', 'main.json'))
+    };
+    var tr = {
+      'en-us': fs.readFileSync(path.join(opts.output, opts.locales[0].toLowerCase(), 'foo.js'), 'utf8'),
+      'fr-fr': fs.readFileSync(path.join(opts.output, opts.locales[1].toLowerCase(), 'foo.js'), 'utf8')
+    };
+    var window = {};
+    for(var expect in expected){
+      window.i18n = {};
+      eval(tr[expect]);
+      if(window.i18n['foo/main'].greeting() !== expected[expect].greeting){
+        gulp.fail = true;
       }
-      cb();
-    });
-
+    }
   });
 
 };
