@@ -1,10 +1,10 @@
 {
   "name": "rind-i18n-gulp",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "gulp task to generate rind i18n files",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/gulp/bin/gulp.js test"
+    "test": "./node_modules/gulp/bin/gulp.js lint && ./node_modules/gulp/bin/gulp.js test"
   },
   "author": "",
   "license": "MIT",
@@ -18,6 +18,10 @@
   "devDependencies": {
     "gulp": "^3.6.2",
     "minimist": "^0.1.0",
-    "rimraf": "^2.2.8"
+    "rimraf": "^2.2.8",
+    "gulp-jsbeautifier": "0.0.2",
+    "gulp-diff": "^0.1.4",
+    "confidence": "^0.12.1",
+    "gulp-eslint": "^0.1.7"
   }
 }

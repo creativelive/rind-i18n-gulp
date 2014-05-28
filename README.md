@@ -16,7 +16,8 @@ var opts = {
   },
   locales: [ 'en-US', 'fr-fr' ],
   output: 'path/to/lang/files',
-  input: 'output/directory'
+  input: 'output/directory',
+  verbode: true // list files as they are compiled
 };
 
 gulp.task('i18n', function() {

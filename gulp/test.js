@@ -7,16 +7,17 @@ var path = require('path');
 var gulp = require('gulp');
 var fs = require('fs');
 
-module.exports = function(gulp, conf){
+module.exports = function(gulp, conf) {
 
   var opts = {
     sets: {
       'foo.js': ['foo/main.json']
     },
-    locales: [ 'en-US', 'fr-fr' ],
+    locales: ['en-US', 'fr-fr'],
     output: path.join(conf.gwd, 'test', 'out', 'js', 'i18n'),
     input: path.join(conf.gwd, 'test', 'lang'),
-    gwd: conf.gwd
+    gwd: conf.gwd,
+    verbose: true
   };
   gulp.task('i18n', ['clean'], i18n(gulp, opts));
 
@@ -30,10 +31,10 @@ module.exports = function(gulp, conf){
       'fr-fr': fs.readFileSync(path.join(opts.output, opts.locales[1].toLowerCase(), 'foo.js'), 'utf8')
     };
     var window = {};
-    for(var expect in expected){
+    for (var expect in expected) {
       window.i18n = {};
       eval(tr[expect]);
-      if(window.i18n['foo/main'].greeting() !== expected[expect].greeting){
+      if (window.i18n['foo/main'].greeting() !== expected[expect].greeting) {
         gulp.fail = true;
       }
     }
