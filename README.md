@@ -1,4 +1,4 @@
-# rind-i18n-gulp [![](https://travis-ci.org/creativelive/rind-i18n-gulp.png)](https://travis-ci.org/creativelive/rind-i18n-gulp)
+# rind-i18n-gulp [![](https://travis-ci.org/creativelive/rind-i18n-gulp.svg)](https://travis-ci.org/creativelive/rind-i18n-gulp)
 
 Gulp tasks to create rind i18n clientside files
 
