@@ -24,7 +24,7 @@ module.exports = function(gulp, conf) {
   gulp.task('test', ['i18n'], function() {
     var expected = {};
     var tr = {};
-    for(var l in opts.locales){
+    for (var l in opts.locales) {
       expected[opts.locales[l]] = require(path.join(opts.input, opts.locales[l], 'foo', 'main.json'));
       tr[opts.locales[l]] = fs.readFileSync(path.join(opts.output, opts.locales[l], 'foo.js'), 'utf8');
     }
