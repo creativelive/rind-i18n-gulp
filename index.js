@@ -8,9 +8,7 @@ module.exports = function i18n(gulp, conf) {
   conf = conf || {};
 
   var sets = conf.sets;
-  var locales = conf.locales.map(function(locale) {
-    return locale.toLowerCase();
-  });
+  var locales = conf.locales;
   var localeSets = locales.length * Object.keys(sets).length;
 
   return function(cb) {

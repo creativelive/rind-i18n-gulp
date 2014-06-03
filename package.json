@@ -1,6 +1,6 @@
 {
   "name": "rind-i18n-gulp",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "gulp task to generate rind i18n files",
   "main": "index.js",
   "scripts": {

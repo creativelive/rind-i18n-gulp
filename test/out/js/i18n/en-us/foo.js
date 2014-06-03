@@ -8,5 +8,5 @@ v=function(d,k){c(d);return d[k]},
 p=function(d,k,o,l,p){c(d);return d[k] in p?p[d[k]]:(k=MessageFormat.locale[l](d[k]-o),k in p?p[k]:p.other)},
 s=function(d,k,p){c(d);return d[k] in p?p[d[k]]:p.other};
 window.i18n["foo/main"] = {
-"greeting":function(d){return "hello"}}
+"greeting":function(d){return "yo"}}
 })();

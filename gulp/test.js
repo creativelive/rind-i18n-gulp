@@ -13,7 +13,7 @@ module.exports = function(gulp, conf) {
     sets: {
       'foo.js': ['foo/main.json']
     },
-    locales: ['en-US', 'fr-fr'],
+    locales: ['en-US', 'fr', 'de-DE'],
     output: path.join(conf.gwd, 'test', 'out', 'js', 'i18n'),
     input: path.join(conf.gwd, 'test', 'lang'),
     gwd: conf.gwd,
@@ -22,14 +22,12 @@ module.exports = function(gulp, conf) {
   gulp.task('i18n', ['clean'], i18n(gulp, opts));
 
   gulp.task('test', ['i18n'], function() {
-    var expected = {
-      'en-us': require(path.join(opts.input, 'en-us', 'foo', 'main.json')),
-      'fr-fr': require(path.join(opts.input, 'fr-fr', 'foo', 'main.json'))
-    };
-    var tr = {
-      'en-us': fs.readFileSync(path.join(opts.output, opts.locales[0].toLowerCase(), 'foo.js'), 'utf8'),
-      'fr-fr': fs.readFileSync(path.join(opts.output, opts.locales[1].toLowerCase(), 'foo.js'), 'utf8')
-    };
+    var expected = {};
+    var tr = {};
+    for(var l in opts.locales){
+      expected[opts.locales[l]] = require(path.join(opts.input, opts.locales[l], 'foo', 'main.json'));
+      tr[opts.locales[l]] = fs.readFileSync(path.join(opts.output, opts.locales[l], 'foo.js'), 'utf8');
+    }
     var window = {};
     for (var expect in expected) {
       window.i18n = {};
@@ -39,5 +37,4 @@ module.exports = function(gulp, conf) {
       }
     }
   });
-
 };
